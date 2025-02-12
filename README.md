@@ -74,6 +74,8 @@ Now you can add as many images as you want to your presentation. The plugin will
 
 ## Demo
 
+Go to the [demo page](https://skyface753.github.io/ReveaJS-lImageIllustrations/).
+
 ### Local
 
 Clone the repository, switch to the `demo` folder and run the Reveal.js server.
@@ -86,7 +88,3 @@ npm start
 ```
 
 Open your browser and go to `http://localhost:8000`.
-
-### GitHub Pages
-
-Coming soon...
