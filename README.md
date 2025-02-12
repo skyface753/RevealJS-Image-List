@@ -4,12 +4,12 @@ A simple plugin for Reveal.js that allows you to add images with captions and so
 
 ## Installation
 
-### 1. Copy the `imagelists.js` and `imagelists.css` files to the `plugin` folder of your reveal.js presentation.
+### 1. Copy the `imagelist.js` and `imagelist.css` files to the `plugin` folder of your reveal.js presentation.
 
 ```bash
-mkdir -p <path-to-revealjs>/plugin/imagelists
-cp imagelists.js <path-to-revealjs>/plugin/imagelists/
-cp imagelists.css <path-to-revealjs>/plugin/imagelists/
+mkdir -p <path-to-revealjs>/plugin/imagelist
+cp imagelist.js <path-to-revealjs>/plugin/imagelist/
+cp imagelist.css <path-to-revealjs>/plugin/imagelist/
 ```
 
 ### 2. Add the source files to the presentation and initialize the plugin.
@@ -22,7 +22,7 @@ In the HEAD
   <link rel="stylesheet" href="dist/reveal.css" />
   <link rel="stylesheet" href="dist/theme/black.css" />
   <!-- The plugin -->
-  <link rel="stylesheet" href="plugin/imagelists/imagelists.css" />
+  <link rel="stylesheet" href="plugin/imagelist/imagelist.css" />
   <!-- End of the plugin -->
   ...
 </head>
@@ -35,7 +35,7 @@ At the end of the BODY (before the `Reveal.initialize` call)
   ...
   <script src="dist/reveal.js"></script>
   <!-- The plugin -->
-  <script src="plugin/imagelists/imagelists.js"></script>
+  <script src="plugin/imagelist/imagelist.js"></script>
   <!-- Reveal.js initialization -->
   <script>
     Reveal.initialize({
