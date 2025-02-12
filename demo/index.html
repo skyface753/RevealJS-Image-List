@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+    <link
+      rel="stylesheet"
+      href="plugin/imageillustrations/imageillustrations.css"
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>Image without data-source</h3>
+          <p>Will be detected as 'Own Work'</p>
+          <img src="https://picsum.photos/200/300" data-text="ABC" />
+        </section>
+        <section>
+          <h3>Image with data-source</h3>
+          <p>Will be sourced from 'example.com'.</p>
+          <img
+            src="https://picsum.photos/id/237/200/300"
+            data-source="https://example.com"
+            data-text="ABC"
+          />
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/imageillustrations/imageillustrations.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RevealImageIllustrations,
+        ],
+        imageIllustrations: {
+          title: 'Abbildungsverzeichnis', // Change the title of the final slide
+          fontSizeList: '1rem', // Change the font size for the list
+          fontSizeCaption: '0.8rem', // Change the font size for the caption
+        },
+      });
+    </script>
+  </body>
+</html>
