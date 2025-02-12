@@ -1,7 +1,7 @@
-const RevealImageIllustrations = {
-  id: 'image-illustrations',
+const RevealImageList = {
+  id: 'image-list',
   init: function (deck) {
-    let config = deck.getConfig().imageIllustrations || {};
+    let config = deck.getConfig().imageList || {};
     config.title = config.title || 'List of Illustrations';
     config.fontSizeList = config.fontSizeList || '1rem';
     config.fontSizeCaption = config.fontSizeCaption || '0.8rem';
@@ -20,7 +20,7 @@ const RevealImageIllustrations = {
       config.captionColor
     );
 
-    let imageIllustrations = [];
+    let imageList = [];
     function isPrintMode() {
       return (
         window.location.search.includes('print-pdf') ||
@@ -30,7 +30,7 @@ const RevealImageIllustrations = {
     }
 
     function collectImageIllustrations() {
-      imageIllustrations = [];
+      imageList = [];
       // isPrintMode = document.querySelector('.pdf-page') !== null;
       console.log('isPrintMode', isPrintMode());
       const containerSelector = '.slides';
@@ -44,7 +44,7 @@ const RevealImageIllustrations = {
         let source = img.getAttribute('data-source');
         let text = img.getAttribute('data-text');
 
-        imageIllustrations.push({
+        imageList.push({
           number,
           src: img.getAttribute('src'),
           source,
@@ -66,7 +66,7 @@ const RevealImageIllustrations = {
     }
 
     function addIllustrationsSlide() {
-      if (imageIllustrations.length === 0) return;
+      if (imageList.length === 0) return;
       console.log('addIllustrationsSlide');
 
       let listHtml = '';
@@ -76,7 +76,7 @@ const RevealImageIllustrations = {
       } else {
         listHtml = `<section><h2>${config.title}</h2><ul class="illustrations-list">`;
       }
-      imageIllustrations.forEach((item) => {
+      imageList.forEach((item) => {
         let listItem = `<li>Figure ${item.number}: `;
         if (item.text) {
           listItem += `${item.text} `;
@@ -100,7 +100,7 @@ const RevealImageIllustrations = {
         // Add the listHTML to the end of the slides, after one second
         setTimeout(() => {
           let a =
-            '<div class="pdf-page" style="height: 727px; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(0, 43, 54);"><div class="slide-background future" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><section data-markdown="" data-markdown-parsed="true" hidden="" aria-hidden="true" class="present" style="display: block; left: 19px; top: 45.5px; width: 960px;">';
+            '<div class="pdf-page" style="height: 727px;"><div class="slide-background future" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><section data-markdown="" data-markdown-parsed="true" hidden="" aria-hidden="true" class="present" style="display: block; left: 19px; top: 45.5px; width: 960px;">';
           a += listHtml;
           a += '</section></div>';
 
@@ -121,7 +121,7 @@ const RevealImageIllustrations = {
 };
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = RevealImageIllustrations;
+  module.exports = RevealImageList;
 } else {
-  window.RevealImageIllustrations = RevealImageIllustrations;
+  window.RevealImageList = RevealImageList;
 }
