@@ -1,23 +1,12 @@
-/**
- * Reveal.js Plugin: Image Illustrations List with Captions
- * Automatically inserts captions below images that have a data-text attribute,
- * and adds a final slide listing all illustrations with their numbers, captions, and sources.
- *
- * Configuration options (passed via Reveal configuration under "imageIllustrations"):
- *   title:    Title of the final slide (default: "List of Illustrations")
- *   fontSize: Font size for the list items (default: "1rem")
- */
 const RevealImageIllustrations = {
   id: 'image-illustrations',
   init: function (deck) {
-    // Get configuration options from Reveal config (or set defaults)
     let config = deck.getConfig().imageIllustrations || {};
     config.title = config.title || 'List of Illustrations';
     config.fontSizeList = config.fontSizeList || '1rem';
     config.fontSizeCaption = config.fontSizeCaption || '0.8rem';
     config.captionColor = config.captionColor || '#555';
 
-    // Set a CSS variable for the font size (used by the external CSS)
     document.documentElement.style.setProperty(
       '--illustrations-font-size-list',
       config.fontSizeList
@@ -32,29 +21,37 @@ const RevealImageIllustrations = {
     );
 
     let imageIllustrations = [];
+    function isPrintMode() {
+      return (
+        window.location.search.includes('print-pdf') ||
+        // Reveal.isPrintingPDF() ||
+        document.documentElement.classList.contains('print-pdf')
+      );
+    }
 
     function collectImageIllustrations() {
       imageIllustrations = [];
-      // Select all images that have either data-source or data-text attributes
+      // isPrintMode = document.querySelector('.pdf-page') !== null;
+      console.log('isPrintMode', isPrintMode());
+      const containerSelector = '.slides';
       const images = document.querySelectorAll(
-        '.slides img[data-source], .slides img[data-text]'
+        `${containerSelector} img[data-source], ${containerSelector} img[data-text]`
       );
+      console.log('images', images);
+
       images.forEach((img, index) => {
         let number = index + 1;
         let source = img.getAttribute('data-source');
         let text = img.getAttribute('data-text');
 
-        // Store illustration info for the final list slide
         imageIllustrations.push({
-          number: number,
+          number,
           src: img.getAttribute('src'),
-          source: source,
-          text: text,
+          source,
+          text,
         });
 
-        // If a data-text attribute is provided, insert a caption below the image
         if (text) {
-          // Avoid adding a duplicate caption if one already exists
           if (
             !img.nextElementSibling ||
             !img.nextElementSibling.classList.contains('image-caption')
@@ -70,8 +67,15 @@ const RevealImageIllustrations = {
 
     function addIllustrationsSlide() {
       if (imageIllustrations.length === 0) return;
+      console.log('addIllustrationsSlide');
 
-      let listHtml = `<section><h2>${config.title}</h2><ul class="illustrations-list">`;
+      let listHtml = '';
+      console.log('isPrintMode2', isPrintMode());
+      if (isPrintMode()) {
+        listHtml = `<div class="pdf-page"><h2>${config.title}</h2><ul class="illustrations-list">`;
+      } else {
+        listHtml = `<section><h2>${config.title}</h2><ul class="illustrations-list">`;
+      }
       imageIllustrations.forEach((item) => {
         let listItem = `<li>Figure ${item.number}: `;
         if (item.text) {
@@ -85,11 +89,28 @@ const RevealImageIllustrations = {
         listItem += `</li>`;
         listHtml += listItem;
       });
-      listHtml += '</ul></section>';
+      // listHtml += '</ul></div>';
+      if (isPrintMode()) {
+        listHtml += '</ul></div>';
+      } else {
+        listHtml += '</ul></section>';
+      }
 
-      document
-        .querySelector('.slides')
-        .insertAdjacentHTML('beforeend', listHtml);
+      if (isPrintMode()) {
+        // Add the listHTML to the end of the slides, after one second
+        setTimeout(() => {
+          let a =
+            '<div class="pdf-page" style="height: 727px; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(0, 43, 54);"><div class="slide-background future" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><section data-markdown="" data-markdown-parsed="true" hidden="" aria-hidden="true" class="present" style="display: block; left: 19px; top: 45.5px; width: 960px;">';
+          a += listHtml;
+          a += '</section></div>';
+
+          document.querySelector('.slides').insertAdjacentHTML('beforeend', a);
+        }, 1000);
+      } else {
+        document
+          .querySelector('.slides')
+          .insertAdjacentHTML('beforeend', listHtml);
+      }
     }
 
     deck.on('ready', function () {
@@ -99,7 +120,6 @@ const RevealImageIllustrations = {
   },
 };
 
-// Export the plugin for module systems or attach it to the window object
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = RevealImageIllustrations;
 } else {
