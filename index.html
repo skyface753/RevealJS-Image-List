@@ -12,10 +12,8 @@
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
     <link rel="stylesheet" href="dist/theme/moon.css" />
-    <link
-      rel="stylesheet"
-      href="plugin/imagelist/imagelist.css"
-    />
+
+    <link rel="stylesheet" href="plugin/mediaList/mediaList.css" />
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
@@ -35,7 +33,36 @@
             src="https://picsum.photos/id/237/200/300"
             data-source="https://example.com"
             data-text="ABC"
+            data-id="image-1"
           />
+        </section>
+        <section>
+          <h3>Same image as before</h3>
+          <p>Have the same number in the caption and in the list</p>
+          <img
+            src="https://picsum.photos/id/237/200/300"
+            data-source="https://example.com"
+            data-text="ABC"
+            data-id="image-1"
+          />
+        </section>
+        <section>
+          <h3>Video</h3>
+          <p>Will be sourced from 'example.com'.</p>
+          <video
+            muted
+            loop
+            data-autoplay
+            data-text="Big Buck Bunny"
+            data-source="https://example.com"
+          >
+            <source
+              data-src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </section>
       </div>
     </div>
 
@@ -43,7 +70,8 @@
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
-    <script src="plugin/imagelist/imagelist.js"></script>
+    <script src="plugin/mediaList/mediaList.js"></script>
+
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
@@ -56,12 +84,15 @@
           RevealMarkdown,
           RevealHighlight,
           RevealNotes,
-          RevealImageList,
+          RevealMediaList,
         ],
-        imageLists: {
-          title: 'Abbildungsverzeichnis', // Change the title of the final slide
+        mediaIllustrations: {
+          title: 'List of Medias', // Change the title of the final slide
           fontSizeList: '1rem', // Change the font size for the list
           fontSizeCaption: '0.8rem', // Change the font size for the caption
+          captionColor: '#555', // Change the color of the caption under the image
+          imageCaptionName: 'Image', // Change the name of the image caption
+          videoCaptionName: 'Video', // Change the name of the video caption
         },
       });
     </script>

@@ -1,5 +1,5 @@
 /* Styles for the image captions */
-.image-caption {
+.media-caption {
   font-style: italic;
   text-align: center;
   margin-top: 0px;
@@ -21,4 +21,15 @@
 
 .illustrations-list li {
   margin: 0.5em 0;
+}
+
+/* PDF */
+.media-illustrations-pdf-page {
+  height: 727px;
+  background: none 0% 0% / auto repeat scroll padding-box border-box
+    rgb(0, 43, 54);
+
+  div {
+    display: block;
+  }
 }
