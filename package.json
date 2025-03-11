@@ -1,0 +1,23 @@
+{
+  "name": "revealjs-media-list",
+  "version": "1.0.2",
+  "description": "Add images and videos with captions and sources to your presentation",
+  "main": "mediaList/mediaList.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skyface753/RevealJS-Media-List.git"
+  },
+  "author": "Sebastian Jörz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skyface753/RevealJS-Media-List/issues"
+  },
+  "homepage": "https://github.com/skyface753/RevealJS-Media-List#readme",
+  "files": [
+    "mediaList/mediaList.js",
+    "mediaList/mediaList.css"
+  ]
+}

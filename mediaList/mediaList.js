@@ -33,6 +33,12 @@ const RevealMediaList = {
       );
     }
 
+    const getCaptionName = (type) => {
+      return type.toLowerCase() === 'video'
+        ? config.videoCaptionName
+        : config.imageCaptionName;
+    };
+
     function collectMediaIllustrations() {
       mediaIllustrations = [];
       assignedNumbers.image.clear();
@@ -93,12 +99,6 @@ const RevealMediaList = {
       });
     }
 
-    const getCaptionName = (type) => {
-      return type.toLowerCase() === 'video'
-        ? config.videoCaptionName
-        : config.imageCaptionName;
-    };
-
     function addIllustrationsSlide() {
       if (mediaIllustrations.length === 0) return;
 
@@ -115,7 +115,7 @@ const RevealMediaList = {
       });
 
       let totalSlides = Math.ceil(uniqueIllustrations.length / itemsPerSlide);
-
+      let endHtml = '<section>';
       for (let i = 0; i < totalSlides; i++) {
         let start = i * itemsPerSlide;
         let end = start + itemsPerSlide;
@@ -143,23 +143,37 @@ const RevealMediaList = {
 
         if (isPrintMode()) {
           setTimeout(() => {
+            const addSlideNumber = false;
             const slideNumber = deck.getSlides().length + 1;
             let a =
               '<div class="pdf-page media-illustrations-pdf-page"><div class="slide-background future" data-loaded="true"><div class="slide-background-content"></div></div><section data-markdown="" data-markdown-parsed="true" hidden="" aria-hidden="true" class="present" style="display: block; left: 19px; top: 45.5px; width: 960px;">';
             a += listHtml;
-            a +=
-              '</section><div class="slide-number slide-number-pdf">' +
-              slideNumber +
-              '</div></div>';
+            a += '</section>';
+            if (addSlideNumber) {
+              a +=
+                '<div class="slide-number slide-number-pdf">' +
+                slideNumber +
+                '</div>';
+            }
+            a += '</div>';
             document
               .querySelector('.slides')
               .insertAdjacentHTML('beforeend', a);
           }, 1000);
         } else {
-          document
-            .querySelector('.slides')
-            .insertAdjacentHTML('beforeend', listHtml);
+          // listHtml = '<section>' + listHtml + '</section>';
+          endHtml += listHtml;
+
+          // document
+          //   .querySelector('.slides')
+          //   .insertAdjacentHTML('beforeend', listHtml);
         }
+      }
+      endHtml += '</section>';
+      if (!isPrintMode()) {
+        document
+          .querySelector('.slides')
+          .insertAdjacentHTML('beforeend', endHtml);
       }
     }
 
@@ -175,15 +189,3 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
   window.RevealMediaList = RevealMediaList;
 }
-
-// const slideNumber = deck.getSlides().length + 1;
-//             let a =
-//               '<div class="pdf-page media-illustrations-pdf-page"><div class="slide-background future" data-loaded="true"><div class="slide-background-content"></div></div><section data-markdown="" data-markdown-parsed="true" hidden="" aria-hidden="true" class="present" style="display: block; left: 19px; top: 45.5px; width: 960px;">';
-//             a += listHtml;
-//             a +=
-//               '</section><div class="slide-number slide-number-pdf">' +
-//               slideNumber +
-//               '</div></div>';
-//             document
-//               .querySelector('.slides')
-//               .insertAdjacentHTML('beforeend', a);

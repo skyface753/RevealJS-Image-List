@@ -4,6 +4,56 @@ A simple plugin for Reveal.js that allows you to add images and videos with capt
 
 ## Installation
 
+To install the plugin, the `mediaList.js` and `mediaList.css` files need to be added to the presentation. The plugin can be installed via NPM, JSDelivr CDN, or manually.
+
+### NPM (Recommended)
+
+#### 1. Install the plugin.
+
+```bash
+npm install revealjs-media-list
+```
+
+#### 2. Add the source files to the presentation and initialize the plugin.
+
+In the HEAD
+
+```html
+<head>
+  ...
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/black.css" />
+  <!-- START: The plugin -->
+  <link
+    rel="stylesheet"
+    href="node_modules/revealjs-media-list/mediaList/mediaList.css"
+  />
+  <script src="node_modules/revealjs-media-list/mediaList/mediaList.js"></script>
+  <!-- END: The plugin -->
+  ...
+</head>
+```
+
+> Note: Add the plugin to the list of plugins and configure it as described in the [Usage](#usage) section.
+
+### JSDelivr CND (Easiest)
+
+#### 1. Add the source files to the presentation and initialize the plugin.
+
+In the HEAD
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/revealjs-media-list@latest/mediaList/mediaList.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/revealjs-media-list@latest/mediaList/mediaList.js"></script>
+```
+
+> Note: Add the plugin to the list of plugins and configure it as described in the [Usage](#usage) section.
+
+### Manual
+
 ### 1. Copy the `mediaList/mediaList.js` and `mediaList/mediaList.css` files to the `plugin/mediaList/mediaList` folder of your reveal.js presentation.
 
 ```bash
@@ -19,26 +69,41 @@ In the HEAD
 ```html
 <head>
   ...
-  <link rel="stylesheet" href="dist/reveal.css" />
-  <link rel="stylesheet" href="dist/theme/black.css" />
-  <!-- START: The plugin -->
   <link rel="stylesheet" href="plugin/mediaList/mediaList.css" />
-  <!-- END: The plugin -->
+  <script src="plugin/mediaList/mediaList.js"></script>
   ...
 </head>
 ```
 
-At the end of the BODY (before the `Reveal.initialize` call)
+> Note: Add the plugin to the list of plugins and configure it as described in the [Usage](#usage) section.
 
-1. Add the script for the plugin (`mediaList.js`).
-2. Add the plugin to the list of plugins (`RevealMediaList`).
-3. Add the configuration for the plugin (`mediaIllustrations`).
+## Usage
+
+After installing the plugin, you need to add the plugin to the list of plugins and configure it.
+
+1. Add the plugin to the list of plugins (`RevealMediaList`).
+2. Add the configuration for the plugin (`mediaIllustrations`).
+
+### 1. Add the plugin to the list of plugins
 
 ```html
 <body>
   ...
-  <script src="dist/reveal.js"></script>
-  <script src="plugin/mediaList/mediaList.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMediaList],
+    });
+  </script>
+</body>
+```
+
+### 2. Add the configuration for the plugin
+
+```html
+<body>
+  ...
   <script>
     Reveal.initialize({
       hash: true,
